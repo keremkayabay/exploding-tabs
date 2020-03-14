@@ -1,0 +1,16 @@
+.exploding-site{
+    margin:5px;
+}
+.float-left{
+    float: left;
+}
+.site{
+    width: 275px;
+}
+.timer{
+    width: 50px;
+}
+.button{
+    cursor: pointer;
+    padding: 5px;
+}
