@@ -1,9 +1,31 @@
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById("add-exploding-site").addEventListener("click", addExplodingSite);
-});
-
 function onError(error) {
     console.log(error);
+}
+
+function incrementTimer(){
+    let siteKey = this.dataset.siteKey;
+
+    browser.storage.local.get(siteKey).then( function( results ){
+        timer = results[siteKey].timer;
+        timer += 60;
+        browser.storage.local.set({
+            [siteKey]: {timer: timer}
+        }).then(updateExplodingSites,onError);
+    }, onError);
+}
+
+function decrementTimer(){
+    let siteKey = this.dataset.siteKey;
+
+    browser.storage.local.get(siteKey).then( function( results ){
+        timer = results[siteKey].timer;
+        timer -= 60;
+        if( timer > 0 ){
+            browser.storage.local.set({
+                [siteKey]: {timer: timer}
+            }).then(updateExplodingSites,onError);
+        }
+    }, onError);
 }
 
 function addExplodingSite() { //add active tab to exploding sites
@@ -18,8 +40,9 @@ function addExplodingSite() { //add active tab to exploding sites
 }
 
 function updateExplodingSites(){
-    document.getElementById("exploding-sites").innerHTML = "";
     browser.storage.local.get(null).then( function( results ){
+        let explodingSites = document.getElementById("exploding-sites");
+        explodingSites.innerHTML = "";
         let keys = Object.keys(results);
         for(let siteKey of keys){
             let explodingSite = document.createElement("div");
@@ -40,6 +63,14 @@ function updateExplodingSites(){
             increment.classList.add('float-left');
             decrement.classList.add('float-left');
 
+            increment.classList.add('ml-5');
+
+            increment.dataset.siteKey = siteKey;
+            decrement.dataset.siteKey = siteKey;
+
+            increment.addEventListener("click",incrementTimer);
+            decrement.addEventListener("click",decrementTimer);
+
             site.textContent = siteKey;
             timer.textContent = results[siteKey].timer;
             increment.textContent = "+";
@@ -50,11 +81,16 @@ function updateExplodingSites(){
             explodingSite.appendChild(decrement);
             explodingSite.appendChild(increment);
 
-            document.getElementById("exploding-sites").append(explodingSite);
+            explodingSites.append(explodingSite);
         }
+        //document.getElementById("exploding-sites").innerHTML = "";
+        //document.getElementById("exploding-sites").innerHTML = explodingSites.innerHTML;
     }, onError);
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById("add-exploding-site").addEventListener("click", addExplodingSite);
+});
 
 //browser.storage.local.clear();
 updateExplodingSites();

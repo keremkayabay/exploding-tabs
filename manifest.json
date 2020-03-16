@@ -12,12 +12,18 @@
   
     "permissions": [
       "tabs",
-      "storage"
+      "storage",
+      "activeTab",
+      "<all_urls>"
     ],
   
     "browser_action": {
       "default_icon": "icons/bomb-solid-96.png",
       "default_title": "Exploding Tabs",
       "default_popup": "popup/exploding-tabs.html"
+    },
+
+    "background": {
+      "scripts": ["coordinator.js"]
     }
   }

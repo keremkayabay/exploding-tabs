@@ -1,16 +1,38 @@
-.exploding-site{
-    margin:5px;
-}
 .float-left{
     float: left;
 }
-.site{
-    width: 275px;
+.float-right{
+    float: right;
 }
-.timer{
-    width: 50px;
+.ml-3{
+    margin-left: 3px;
+}
+.ml-5{
+    margin-left: 5px;
 }
 .button{
     cursor: pointer;
-    padding: 5px;
+    background-color: rgb(255, 145, 0);
+    border: none;
+    color: white;
+    padding: 10px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+#popup-content{
+    padding: 10px 16px;
+}
+.exploding-site{
+    height: 50px;
+}
+.site{
+    color: red;
+    width: 275px;
+    padding:10px;
+}
+.timer{
+    width: 50px;
+    padding:10px;
 }
