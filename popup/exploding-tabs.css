@@ -1,3 +1,13 @@
+body{
+    width: 395px;
+    height: 400px;
+    overflow-x: hidden;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 15px;
+}
+#popup-content{
+    width:375px;
+}
 .float-left{
     float: left;
 }
@@ -10,9 +20,9 @@
 .ml-5{
     margin-left: 5px;
 }
-.button{
+/*.button{
     cursor: pointer;
-    background-color: rgb(255, 145, 0);
+    background-color: rgb(223, 117, 20);
     border: none;
     color: white;
     padding: 10px 16px;
@@ -20,19 +30,39 @@
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+}*/
+.button{
+    display:inline-block;
+    padding:0.3em 1.2em;
+    margin:0 0.3em 0.3em 0;
+    border-radius:0;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-weight:300;
+    color:#FFFFFF;
+    background-color:rgb(167, 14, 14);
+    text-align:center;
+    transition: all 0.2s;
+    cursor: pointer;
 }
-#popup-content{
-    padding: 10px 16px;
+.button:hover{
+    background-color:rgb(114, 9, 0);
+}
+.button-small{
+    padding:0.3em 0.6em;
+    margin: 0;
+    margin-top: auto;
 }
 .exploding-site{
-    height: 50px;
+    height:35px;
 }
 .site{
     color: red;
-    width: 275px;
-    padding:10px;
+    width: 200px;
+    padding:4px;
 }
 .timer{
-    width: 50px;
-    padding:10px;
+    width: 40px;
+    margin-right:5px;
+    text-align:right;
 }

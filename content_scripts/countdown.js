@@ -9,9 +9,9 @@
     }
     window.hasRun = true;
     
+    var countdown = null;
     var countdownInProgress = false;
-    var timeLeft = 300;
-    var myId = 1;
+    var timeLeft = 180;
 
     function onError(error) {
         console.log(error);
@@ -23,8 +23,8 @@
         return;
       }
       countdownInProgress = true;
-      timeLeft = 5;
-      setInterval(tick, 1000);
+      timeLeft = timer;
+      countdown = setInterval(tick, 1000);
     }
     
     function tick(){
@@ -32,15 +32,13 @@
 
       if( timeLeft < 1 ){
         browser.runtime.sendMessage({greeting: "Greeting from the content script"});
-
-        return;
+        clearInterval(countdown);
       }
-
       document.title = "Time left: " + timeLeft;
     }
 
     function stopCountdown() {
-        alert("Countdown halted.");
+      clearInterval(countdown);
     }
   
     /**
@@ -48,7 +46,6 @@
     */
     browser.runtime.onMessage.addListener((message) => {
       if (message.command === "start-countdown") {
-        myId = message.tabId;
         startCountdown(message.timer);
       }
       else if (message.command === "stop-countdown") {

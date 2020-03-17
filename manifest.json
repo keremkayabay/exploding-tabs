@@ -3,7 +3,7 @@
     "manifest_version": 2,
     "name": "Exploding Tabs",
     "version": "1.0",
-  
+    "author": "Kerem Kayabay",
     "description": "Set up a countdown timer for addictive sites.",
     "icons": {
       "48": "icons/bomb-solid-48.png",
@@ -21,6 +21,11 @@
       "default_icon": "icons/bomb-solid-96.png",
       "default_title": "Exploding Tabs",
       "default_popup": "popup/exploding-tabs.html"
+    },
+
+    "page_action": {
+      "default_icon": "icons/stopwatch-solid-48.png",
+      "default_title": "Stop countdown"
     },
 
     "background": {

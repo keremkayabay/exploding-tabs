@@ -16,10 +16,10 @@ function initiateTimer(tabId, url){
                 tabId,
                 {
                     command: "start-countdown",
-                    timer: timer,
-                    tabId: tabId
+                    timer: timer
                 }
             ).catch(onError);
+            browser.pageAction.show(tabId);
         }, onError);
     }, onError);
 }
@@ -34,6 +34,16 @@ function  handleMessage(request, sender, sendResponse) {
     console.log("Message from the content script: " + request.greeting );
     browser.tabs.remove(sender.tab.id);
 }
+
+browser.pageAction.onClicked.addListener((tab) => {
+    browser.tabs.sendMessage(
+        tab.id,
+        {
+            command: "stop-countdown"
+        }
+    ).catch(onError);
+    browser.pageAction.hide(tab.id);
+});
 
 browser.tabs.onUpdated.addListener(handleUpdateOnTab);
 
