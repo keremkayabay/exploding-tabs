@@ -48,7 +48,7 @@ function addExplodingSite() { //add active tab to exploding sites
 function updateExplodingSites(){
     browser.storage.local.get(null).then( function( results ){
         let explodingSites = document.getElementById("exploding-sites");
-        explodingSites.innerHTML = "";
+        explodingSites.textContent = "";
         let keys = Object.keys(results);
         for(let siteKey of keys){
             let explodingSite = document.createElement("div");
@@ -83,11 +83,11 @@ function updateExplodingSites(){
             increment.addEventListener("click",incrementTimer);
             remove.addEventListener("click",removeSite);
 
-            site.innerHTML = siteKey;
-            timer.innerHTML = results[siteKey].timer;
-            increment.innerHTML = '<i class="fas fa-plus"></i>';
-            decrement.innerHTML = '<i class="fas fa-minus"></i>';
-            remove.innerHTML = '<i class="fas fa-trash-alt"></i>';
+            site.textContent = siteKey;
+            timer.textContent = results[siteKey].timer;
+            increment.innerHTML = Sanitizer.escapeHTML`<i class="fas fa-plus"></i>`;
+            decrement.innerHTML = Sanitizer.escapeHTML`<i class="fas fa-minus"></i>`;
+            remove.innerHTML = Sanitizer.escapeHTML`<i class="fas fa-trash-alt"></i>`;
 
             explodingSite.appendChild(remove);
             explodingSite.appendChild(site);
@@ -97,8 +97,6 @@ function updateExplodingSites(){
 
             explodingSites.append(explodingSite);
         }
-        //document.getElementById("exploding-sites").innerHTML = "";
-        //document.getElementById("exploding-sites").innerHTML = explodingSites.innerHTML;
     }, onError);
 }
 
