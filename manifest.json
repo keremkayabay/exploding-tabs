@@ -2,9 +2,9 @@
 
     "manifest_version": 2,
     "name": "Exploding Tabs",
-    "version": "1.0",
+    "version": "1.1",
     "author": "Kerem Kayabay",
-    "description": "Set up a countdown timer for addictive sites.",
+    "description": "A browser extension to set up a countdown timer for addictive sites.",
     "icons": {
       "48": "icons/bomb-solid-48.png",
       "96": "icons/bomb-solid-96.png"

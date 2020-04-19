@@ -64,8 +64,10 @@ function updateExplodingSites(){
 
             increment.classList.add('button');
             increment.classList.add('button-small');
+            increment.classList.add('button-black');
             decrement.classList.add('button');
             decrement.classList.add('button-small');
+            decrement.classList.add('button-black');
             remove.classList.add('button');
             remove.classList.add('button-small');
 

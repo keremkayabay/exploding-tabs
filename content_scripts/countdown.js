@@ -72,12 +72,12 @@
       countdownBodyElement.style.left = "25%";
       countdownBodyElement.style.width = "50%";
       countdownBodyElement.style.paddingTop = "30px";
-      countdownBodyElement.style.paddingLeft = "5px";
+      countdownBodyElement.style.paddingLeft = "10px";
       countdownBodyElement.style.backgroundColor = "white";
       countdownBodyElement.style.fontFamily = "Helvetica, Arial, sans-serif";
-      countdownBodyElement.style.fontSize = "15px";
-      //countdownBodyElement.style.borderBottom = "2px solid #000";
-      countdownBodyElement.style.boxShadow = "5px 5px 0px grey";
+      countdownBodyElement.style.fontSize = "16px";
+      countdownBodyElement.style.borderBottom = "thick solid rgb(167, 14, 14)";
+      countdownBodyElement.style.boxShadow = "0px 1px 10px grey";
       countdownBodyElement.style.cursor = "pointer";
       countdownBodyElement.style.zIndex = "999999999";
       countdownBodyElement.addEventListener("click", clickOnCountdownBodyElement);
