@@ -50,6 +50,11 @@ function updateExplodingSites(){
         let explodingSites = document.getElementById("exploding-sites");
         explodingSites.textContent = "";
         let keys = Object.keys(results);
+
+        if(keys.length == 0){
+            explodingSites.textContent = "The list is currently empty.";
+        }
+
         for(let siteKey of keys){
             let explodingSite = document.createElement("div");
             let site = document.createElement("div");
