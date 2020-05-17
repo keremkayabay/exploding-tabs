@@ -24,6 +24,17 @@ function initiateTimer(tabId, url){
     }, onError);
 }
 
+function notify( message ){
+    browser.notifications.clear("destruction-notification");
+
+    browser.notifications.create("destruction-notification", {
+        "type": "basic",
+        "title": "Exploding Tabs",
+        "iconUrl": "icons/bomb-solid-48.png",
+        "message": message
+    });
+}
+
 function handleUpdateOnTab(tabId, changeInfo, tabInfo) {
     if (changeInfo.url) {
         initiateTimer(tabId, changeInfo.url)
@@ -32,7 +43,14 @@ function handleUpdateOnTab(tabId, changeInfo, tabInfo) {
 
 function  handleMessage(request, sender, sendResponse) {
     console.log("Message from the content script: " + request.greeting );
-    browser.tabs.remove(sender.tab.id);
+    if( request.command == "boom" ){
+        browser.tabs.remove(sender.tab.id);
+    }
+    else if( request.command == "notify" ){
+        if( sender.tab.active ){
+            notify( request.message );
+        }
+    }
 }
 
 browser.pageAction.onClicked.addListener((tab) => {
@@ -42,6 +60,7 @@ browser.pageAction.onClicked.addListener((tab) => {
             command: "stop-countdown"
         }
     ).catch(onError);
+    browser.notifications.clear("destruction-notification");
     browser.pageAction.hide(tab.id);
 });
 

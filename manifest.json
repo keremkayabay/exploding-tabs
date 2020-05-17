@@ -6,6 +6,7 @@
     "author": "Kerem Kayabay",
     "description": "A browser extension to set up a countdown timer for addictive sites.",
     "icons": {
+      "32": "icons/bomb-solid-32.png",
       "48": "icons/bomb-solid-48.png",
       "96": "icons/bomb-solid-96.png"
     },
