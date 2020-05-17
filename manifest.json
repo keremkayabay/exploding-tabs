@@ -2,7 +2,7 @@
 
     "manifest_version": 2,
     "name": "Exploding Tabs",
-    "version": "1.2",
+    "version": "1.3",
     "author": "Kerem Kayabay",
     "description": "A browser extension to set up a countdown timer for addictive sites.",
     "icons": {
@@ -12,6 +12,7 @@
   
     "permissions": [
       "tabs",
+      "notifications",
       "storage",
       "activeTab",
       "<all_urls>"
