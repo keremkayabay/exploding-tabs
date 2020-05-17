@@ -2,6 +2,7 @@ exploding-tabs.zip
 images
 images/*
 icons/*
+!icons/bomb-solid-32.png
 !icons/bomb-solid-48.png
 !icons/bomb-solid-96.png
 !icons/stopwatch-solid-48.png
