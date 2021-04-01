@@ -1,5 +1,18 @@
+const configsViewModel = {
+    renameTab: {
+        default: "true",
+        get: ()=>JSON.stringify(document.querySelector("#renameTab").checked),
+        set: value=>document.querySelector("#renameTab").checked=value=="true",
+    },
+    notificationOnStart: {
+        default: "true",
+        get: ()=>JSON.stringify(document.querySelector("#notificationOnStart").checked),
+        set: value=>document.querySelector("#notificationOnStart").checked=value=="true",
+    }
+}
+
 function onError(error) {
-    console.log(error);
+    console.error(error);
 }
 
 function incrementTimer(){
@@ -45,12 +58,35 @@ function addExplodingSite() { //add active tab to exploding sites
     }, onError);
 }
 
+async function updateConfig() {
+    const key = this.id;
+    const value = configsViewModel[key].get();
+    browser.storage.local.set({["config-" + key]: value})
+        .catch(onError);
+}
+
+async function loadConfigs() {
+    for (const key of Object.keys(configsViewModel)) {
+        const storeKey = "config-" + key;
+        const data = await browser.storage.local.get(storeKey);
+        let value = data[storeKey];
+        if (value == undefined) {
+            value = configsViewModel[key].default;
+            browser.storage.local.set({[storeKey]: value})
+                .catch(onError);
+        };
+        configsViewModel[key].set(value)
+
+        document.querySelector("#configs div.block #" + key).addEventListener("change", updateConfig);
+    }
+}
+
 function updateExplodingSites(){
     browser.storage.local.get(null).then( function( results ){
         let explodingSites = document.getElementById("exploding-sites");
         explodingSites.textContent = "";
         let keys = Object.keys(results);
-
+        keys = keys.filter(key => !key.startsWith("config-"));
         if(keys.length == 0){
             explodingSites.textContent = "The list is currently empty.";
         }
@@ -109,7 +145,8 @@ function updateExplodingSites(){
 
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById("add-exploding-site").addEventListener("click", addExplodingSite);
+    loadConfigs();
 });
 
-//browser.storage.local.clear();
+// browser.storage.local.clear();
 updateExplodingSites();
