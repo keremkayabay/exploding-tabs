@@ -16,7 +16,14 @@ body{
     /*box-shadow: 0px 1px 5px grey;*/
     height: 30px;
     padding-top: 10px;
-    padding-right: 20px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+#add-exploding-site{
+    margin:0px;
+}
+#add-exploding-site i{
+    padding-left:5px;
 }
 #exploding-sites{
     padding-right: 10px;
@@ -73,4 +80,39 @@ body{
     padding:4px;
     margin-right:5px;
     text-align:right;
+}
+#configs {
+    height: 0;
+    overflow: hidden;
+
+    -webkit-transition: height 300ms linear;
+    -moz-transition: height 300ms linear;
+    -o-transition: height 300ms linear;
+    transition: height 300ms linear;
+
+    width: 100%;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+#show-configs {
+    display: none;
+}
+#show-configs:checked + #configs {
+    height: 60px;
+}
+.block label {
+    width: 50px;
+}
+.block > input {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display:inline-block;
+    vertical-align:middle;
+    margin-left:20px
+}
+.block > label {
+    display:inline-block;
+    padding-top: 5px;
+    text-align: right;
+    width: 140px;
 }

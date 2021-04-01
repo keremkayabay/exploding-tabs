@@ -9,8 +9,24 @@
   <body>
     <div id="popup-content">
       <div id="header">
+        <div id="header-buttons" class="button button-link float-left">
+          <label for="show-configs"><i class="fas fa-bars"></i></label>
+        </div>
         <div id="add-exploding-site" class="button button-link float-right">
-          Add this site&nbsp;<i class="fas fa-bomb"></i>
+          Add this site<i class="fas fa-bomb"></i>
+        </div>
+      </div>
+      <div id="configs-content">
+        <input type="checkbox" id="show-configs"/>
+        <div id="configs">
+          <div class="block">
+            <label>Rename Tabs</label>
+            <input type="checkbox" id="renameTab"/>
+          </div>
+          <div class="block">
+            <label>Notification on Start</label>
+            <input type="checkbox" id="notificationOnStart"/>
+          </div>
         </div>
       </div>
       <div id="exploding-sites">
@@ -20,5 +36,4 @@
     <script src="exploding-tabs.js"></script>
     <script src="sanitizer.js"></script>
   </body>
-  
-  </html>
+</html>

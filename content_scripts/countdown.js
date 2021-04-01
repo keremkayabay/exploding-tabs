@@ -11,6 +11,8 @@
     
     var countdown = null;
     var countdownInProgress = false;
+    var renameTab = true;
+    var notificationOnStart = true;
     var timeLeft = 180;
     var timePassed = 0;
 
@@ -18,21 +20,25 @@
         console.log(error);
     }
 
-    function startCountdown(timer) {
-      console.log("test");
+    function startCountdown(message) {
       if( countdownInProgress ){
         return;
       }
 
-      browser.runtime.sendMessage(
-        {
-          command: "notify",
-          message: timer + " seconds left."
-        }
-      );
+      renameTab = message.renameTab;
+      notificationOnStart = message.notificationOnStart;
+      timeLeft = message.timer;
+
+      if (notificationOnStart) {
+        browser.runtime.sendMessage(
+          {
+            command: "notify",
+            message: message.timer + " seconds left."
+          }
+        );
+      }
 
       countdownInProgress = true;
-      timeLeft = timer;
       countdown = setInterval(tick, 1000);
     }
     
@@ -40,7 +46,9 @@
       timeLeft--;
       timePassed++;
 
-      document.title = "Time left: " + timeLeft;
+      if (renameTab) {
+        document.title = "Time left: " + timeLeft;
+      }
 
       if( timeLeft < 1 ){
         browser.runtime.sendMessage(
@@ -69,7 +77,7 @@
     */
     browser.runtime.onMessage.addListener((message) => {
       if (message.command === "start-countdown") {
-        startCountdown(message.timer);
+        startCountdown(message);
       }
       else if (message.command === "stop-countdown") {
         stopCountdown();

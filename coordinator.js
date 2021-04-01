@@ -2,21 +2,31 @@ function onError(error) {
     console.log(error);
 }
 
+async function getConfig(key) {
+    const storeKey = "config-" + key;
+    const data = await browser.storage.local.get(storeKey);
+    return data[storeKey];
+}
+
 function initiateTimer(tabId, url){
     let pathArray = url.split('/');
     let siteKey = pathArray[0] + '//' + pathArray[2];
     
-    browser.storage.local.get(siteKey).then( function( results ){
+    browser.storage.local.get(siteKey).then( async function( results ){
         if( !results[siteKey] ){
             return;
         }
         let timer = results[siteKey].timer;
+        let renameTab = await getConfig("renameTab")=="true";
+        let notificationOnStart = await getConfig("notificationOnStart")=="true";
         browser.tabs.executeScript( tabId, {file: "/content_scripts/countdown.js"}).then( function() {
             browser.tabs.sendMessage(
                 tabId,
                 {
                     command: "start-countdown",
-                    timer: timer
+                    timer: timer,
+                    renameTab: renameTab,
+                    notificationOnStart: notificationOnStart,
                 }
             ).catch(onError);
             browser.pageAction.show(tabId);
@@ -41,8 +51,7 @@ function handleUpdateOnTab(tabId, changeInfo, tabInfo) {
     }
 }
 
-function  handleMessage(request, sender, sendResponse) {
-    console.log("Message from the content script: " + request.greeting );
+function handleMessage(request, sender, sendResponse) {
     if( request.command == "boom" ){
         browser.tabs.remove(sender.tab.id);
     }
