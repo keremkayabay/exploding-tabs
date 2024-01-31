@@ -20,7 +20,7 @@ function decrementTimer(){
     browser.storage.local.get(siteKey).then( function( results ){
         timer = results[siteKey].timer;
         timer -= 60;
-        if( timer > 0 ){
+        if( timer >= 0 ){
             browser.storage.local.set({
                 [siteKey]: {timer: timer}
             }).then(updateExplodingSites,onError);
